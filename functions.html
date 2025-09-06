@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+ <h1>Rock Paper Scissors</h1>
+ <div class = "images">
+ <img src = "bg_white_rock-removebg-preview.png" alt = "Rock">
+ <img src = "bg_white_paper-removebg-preview.png" alt = "Paper">  
+ <img src = "bg_white_scissors-removebg-preview.png" alt = "Scissors"> 
+ </div>
+    <div class = "buttons">
+        <button onclick = "playgame('rock')">Rock</button>
+        <button onclick = "playgame('paper')">Paper</button>
+        <button onclick = "playgame('scissors')">Scissors</button>
+        <button id="resetScoreBtn">Reset Score</button>
+    </div>
+    <script>
+        const Scoreboard = {
+            player: 0,
+            computer: 0,
+            tie: 0
+        };
+        function playgame(PlayerMove)
+        {
+            const a = Math.random();
+            let computerMove = '';
+            if (a < 0.34){
+                computerMove = 'rock';
+            }else if( a <= 0.67){
+                computerMove = 'paper';
+            }else{
+                computerMove = 'scissors';
+            }
+            let result ='';
+            if(PlayerMove === computerMove){
+                result = 'tie';
+            } else if (
+                (PlayerMove === 'rock' && computerMove === 'paper') ||
+                (PlayerMove === 'paper' && computerMove === 'scissors') ||
+                (PlayerMove === 'scissors' && computerMove === 'rock')
+            ) {
+                result = 'lose';
+            }else {
+                 result = 'win';
+            }
+            
+            if(result === 'win'){
+                Scoreboard.player++;
+            } else if (result === 'lose'){
+                Scoreboard.computer++;
+            } else {
+                Scoreboard.tie++;
+            }
+            alert(
+                `You picked: ${PlayerMove.charAt(0).toUpperCase() + PlayerMove.slice(1)}\n` +
+                `Computer picked: ${computerMove.charAt(0).toUpperCase() + computerMove.slice(1)}\n` +
+                `Result of match: ${result.charAt(0).toUpperCase() + result.slice(1)}\n\n` +
+                `Score:\nPlayer: ${Scoreboard.player}\nComputer: ${Scoreboard.computer}\nTie: ${Scoreboard.tie}`
+            );
+        }
+    </script>
+</body>
+</html>
